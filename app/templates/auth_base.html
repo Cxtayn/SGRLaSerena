@@ -1,0 +1,30 @@
+{% from "_macros.html" import ico %}
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="csrf-token" content="{{ csrf_token }}">
+  <title>{% block titulo %}Acceso{% endblock %} · SGR Municipalidad de La Serena</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/sgr.css') }}">
+</head>
+<body>
+{% include "_sprite.html" %}
+<div class="auth-pagina">
+  <header class="auth-barra">
+    <img src="{{ url_for('static', filename='img/logo-laserena.svg') }}" alt="Municipalidad de La Serena" style="background:#920000">
+    <div>SISTEMA MUNICIPAL <span>/ Acceso y recuperación</span></div>
+  </header>
+  <main class="auth-centro" id="contenido">
+    <section class="auth-tarjeta">
+      <div class="sistema">Gestión de Atención Ciudadana</div>
+      {% block contenido %}{% endblock %}
+    </section>
+  </main>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.all.min.js"></script>
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+<script src="{{ url_for('static', filename='js/auth.js') }}"></script>
+</body>
+</html>

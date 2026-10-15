@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- MARCADOR DE POSICIÓN. Reemplazar este archivo por el logotipo oficial de la Municipalidad de La Serena,
+     descargado del material publicado en https://laserena.cl/conocenos/normas-graficas, respetando sus
+     versiones, áreas de resguardo y usos permitidos. Mantener el mismo nombre de archivo. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 48" role="img" aria-label="Municipalidad de La Serena">
+  <rect x="1" y="1" width="258" height="46" rx="4" fill="none" stroke="#ffffff" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="130" y="21" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700" fill="#ffffff">LOGOTIPO OFICIAL</text>
+  <text x="130" y="38" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="11" fill="#ffffff">Municipalidad de La Serena</text>
+</svg>

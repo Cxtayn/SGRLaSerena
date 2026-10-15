@@ -1,0 +1,45 @@
+{% from "_macros.html" import ico %}
+<section id="lista-root" aria-label="Listado de {{ cfg.titulo|lower }}">
+  <div class="herramientas" role="search">
+    <div class="buscar">
+      <label for="buscador">Búsqueda inteligente</label>
+      {{ ico('buscar') }}
+      <input id="buscador" type="search" class="entrada" placeholder="Buscar por nombre, código u otro campo..." autocomplete="off" maxlength="100">
+    </div>
+    {% if cfg.ambito and g.delegaciones|length > 1 %}
+    <div>
+      <label for="filtro-ambito">Ámbito</label>
+      <select id="filtro-ambito" class="entrada">
+        <option value="">Solo delegación activa</option>
+        <option value="autorizadas">Todas mis delegaciones</option>
+      </select>
+    </div>
+    {% endif %}
+    {% if cfg.estados %}
+    <div>
+      <label for="filtro-estado">Filtrar estado</label>
+      <select id="filtro-estado" class="entrada">
+        <option value="">Todos</option>
+        <option value="activo">{{ cfg.estados[0] }}s</option>
+        <option value="inactivo">{{ cfg.estados[1] }}s</option>
+      </select>
+    </div>
+    {% endif %}
+    {% if cfg.puede.exportar %}
+    <button type="button" class="btn btn-suave" id="btn-exportar">{{ ico('descarga') }} Exportar a Excel</button>
+    {% endif %}
+  </div>
+  <div class="tabla-caja" aria-live="polite" aria-busy="true" id="zona-tabla"></div>
+  <div class="paginador" id="paginador"></div>
+</section>
+
+<dialog class="modal" id="modal-registro" aria-labelledby="modal-titulo">
+  <form id="form-registro" novalidate method="dialog">
+    <div class="modal-cabecera">
+      <h2 id="modal-titulo">Registro</h2>
+      <button type="button" id="modal-cerrar" aria-label="Cerrar">{{ ico('x') }}</button>
+    </div>
+    <div class="modal-cuerpo" id="modal-cuerpo"></div>
+    <div class="modal-pie" id="modal-pie"></div>
+  </form>
+</dialog>

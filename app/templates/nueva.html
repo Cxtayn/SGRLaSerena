@@ -1,0 +1,31 @@
+{% extends "auth_base.html" %}
+{% block titulo %}Crear nueva contraseña{% endblock %}
+{% block contenido %}
+<h1>Crear nueva contraseña</h1>
+<p class="paso">Paso 3 de 3 · Nueva clave</p>
+<form id="form-nueva" novalidate>
+  <div class="campo">
+    <label for="password">Nueva contraseña <span class="req" aria-hidden="true">*</span></label>
+    <div class="fila-clave">
+      <input id="password" type="password" autocomplete="new-password" maxlength="128" required aria-required="true" aria-describedby="requisitos err-password">
+      <button type="button" class="btn" data-mostrar="password" aria-pressed="false" aria-controls="password">Mostrar</button>
+    </div>
+    <div class="error-campo" id="err-password" role="alert"></div>
+  </div>
+  <div class="campo">
+    <label for="confirmacion">Confirmar nueva contraseña <span class="req" aria-hidden="true">*</span></label>
+    <div class="fila-clave">
+      <input id="confirmacion" type="password" autocomplete="new-password" maxlength="128" required aria-required="true" aria-describedby="err-confirmacion">
+      <button type="button" class="btn" data-mostrar="confirmacion" aria-pressed="false" aria-controls="confirmacion">Mostrar</button>
+    </div>
+    <div class="error-campo" id="err-confirmacion" role="alert"></div>
+  </div>
+  <ul class="requisitos" id="requisitos" aria-label="Requisitos de la contraseña">
+    {% for k, t in requisitos %}<li data-req="{{ k }}" data-ok="false">{{ t }}</li>{% endfor %}
+    <li data-req="coincide" data-ok="false">Ambas contraseñas coinciden</li>
+  </ul>
+  <button class="btn btn-primario" type="submit" id="btn-guardar">Guardar contraseña</button>
+</form>
+<p class="ayuda" style="margin-top:12px">Al guardar, podrás ingresar con tu nueva contraseña.</p>
+<div class="auth-enlaces"><a href="{{ url_for('auth.login_page') }}">Volver al inicio de sesión</a></div>
+{% endblock %}

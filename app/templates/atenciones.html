@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% from "_macros.html" import ico %}
+{% block titulo %}Atenciones{% endblock %}
+{% block contenido %}
+<div class="miga">Gestión municipal / Atenciones</div>
+<div class="titulo-pagina"><h1>Ingreso de atención</h1></div>
+
+{% if cfg.puede.crear %}
+<section class="tarjeta form-atencion" aria-labelledby="t-form">
+  <h2 class="sr-only" id="t-form">Formulario de ingreso de atención</h2>
+  <form id="form-atencion" novalidate>
+    <p class="ayuda" style="margin-top:0">Los campos con <span class="req">*</span> son obligatorios.</p>
+    <div class="rejilla-2">
+      <div class="campo buscador-vecino" id="campo-vecino">
+        <label for="vecino-buscar">Vecino o solicitante <span class="req" aria-hidden="true">*</span></label>
+        <div id="vecino-entrada">
+          <input id="vecino-buscar" type="text" class="entrada" role="combobox" aria-autocomplete="list" aria-expanded="false"
+                 aria-controls="vecino-lista" autocomplete="off" maxlength="60" placeholder="Buscar por identificador o nombre..." aria-describedby="err-vecino_id ayuda-vecino">
+          <ul class="resultados-vecino" id="vecino-lista" role="listbox" hidden></ul>
+        </div>
+        <div class="vecino-elegido" id="vecino-elegido" hidden>
+          <span id="vecino-elegido-texto"></span>
+          <button type="button" class="btn-enlace" id="vecino-cambiar">Cambiar</button>
+        </div>
+        <div class="ayuda" id="ayuda-vecino">Escribe al menos 2 letras del nombre o del RUT. <button type="button" class="btn-enlace" id="btn-nuevo-vecino">Registrar nuevo solicitante</button></div>
+        <div class="error-campo" id="err-vecino_id" role="alert"></div>
+      </div>
+      <div class="campo">
+        <label for="delegacion-fija">Delegación de atención</label>
+        <input id="delegacion-fija" class="entrada fijo" type="text" readonly value="{{ g.delegacion.codigo }} · {{ g.delegacion.nombre }}  [Asignada por perfil]" aria-describedby="ayuda-deleg">
+        <div class="ayuda" id="ayuda-deleg">Se toma de tu contexto autorizado; para cambiarla usa el selector de la cabecera.</div>
+      </div>
+      <div class="campo">
+        <label for="tipo_id">Tipo de Atención <span class="req" aria-hidden="true">*</span></label>
+        <select id="tipo_id" required aria-required="true" aria-describedby="err-tipo_id"><option value="">Selecciona un tipo</option></select>
+        <div class="error-campo" id="err-tipo_id" role="alert"></div>
+      </div>
+      <div class="campo">
+        <label for="subtipo_id">Sub Atención <span class="req" aria-hidden="true">*</span></label>
+        <select id="subtipo_id" required aria-required="true" aria-describedby="err-subtipo_id ayuda-sub" disabled><option value="">Primero elige el tipo</option></select>
+        <div class="ayuda" id="ayuda-sub">Solo se muestran opciones activas del tipo elegido.</div>
+        <div class="error-campo" id="err-subtipo_id" role="alert"></div>
+      </div>
+    </div>
+    <div class="campo">
+      <label for="descripcion">Descripción de la atención <span class="req" aria-hidden="true">*</span></label>
+      <textarea id="descripcion" maxlength="2000" required aria-required="true" aria-describedby="err-descripcion ayuda-desc" placeholder="Describa la solicitud y los antecedentes necesarios."></textarea>
+      <div class="ayuda" id="ayuda-desc"><span id="contador-desc">0</span> / 2000 caracteres (mínimo 10)</div>
+      <div class="error-campo" id="err-descripcion" role="alert"></div>
+    </div>
+    <p class="ayuda">Responsable: <strong>{{ g.user.nombre }}</strong> (usuario de sesión) | Fecha y hora: automáticas al guardar</p>
+    <div style="display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap">
+      <button type="button" class="btn" id="btn-cancelar-atencion">Cancelar</button>
+      <button type="submit" class="btn btn-primario" id="btn-guardar-atencion">Guardar atención</button>
+    </div>
+  </form>
+</section>
+
+<dialog class="modal" id="modal-vecino" aria-labelledby="modal-vecino-titulo">
+  <form id="form-vecino" novalidate method="dialog">
+    <div class="modal-cabecera"><h2 id="modal-vecino-titulo">Registrar nuevo solicitante</h2>
+      <button type="button" id="vecino-cerrar" aria-label="Cerrar">{{ ico('x') }}</button></div>
+    <div class="modal-cuerpo">
+      <p class="ayuda" style="margin-top:0">Los campos con <span class="req">*</span> son obligatorios.</p>
+      <div class="rejilla-2">
+        <div class="campo"><label for="v-rut">RUT <span class="req" aria-hidden="true">*</span></label><input id="v-rut" type="text" maxlength="12" placeholder="12345678-5" aria-describedby="err-v-rut"><div class="error-campo" id="err-v-rut" role="alert"></div></div>
+        <div class="campo"><label for="v-correo">Correo</label><input id="v-correo" type="email" maxlength="120" aria-describedby="err-v-correo"><div class="error-campo" id="err-v-correo" role="alert"></div></div>
+        <div class="campo"><label for="v-nombres">Nombres <span class="req" aria-hidden="true">*</span></label><input id="v-nombres" type="text" maxlength="80" aria-describedby="err-v-nombres"><div class="error-campo" id="err-v-nombres" role="alert"></div></div>
+        <div class="campo"><label for="v-apellidos">Apellidos <span class="req" aria-hidden="true">*</span></label><input id="v-apellidos" type="text" maxlength="80" aria-describedby="err-v-apellidos"><div class="error-campo" id="err-v-apellidos" role="alert"></div></div>
+        <div class="campo"><label for="v-telefono">Teléfono</label><input id="v-telefono" type="text" maxlength="16" aria-describedby="err-v-telefono"><div class="error-campo" id="err-v-telefono" role="alert"></div></div>
+      </div>
+    </div>
+    <div class="modal-pie"><button type="button" class="btn" id="vecino-cancelar">Cancelar</button><button type="submit" class="btn btn-primario" id="vecino-guardar">Guardar solicitante</button></div>
+  </form>
+</dialog>
+{% endif %}
+
+<h2 style="margin:28px 0 12px;font-size:19px">Atenciones recientes de la delegación</h2>
+{% include "_lista.html" %}
+<script id="datos-pagina" type="application/json">{{ cfg|tojson }}</script>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/crud.js') }}"></script>
+{% if cfg.puede.crear %}<script src="{{ url_for('static', filename='js/atencion.js') }}"></script>{% endif %}
+{% endblock %}

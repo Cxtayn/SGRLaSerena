@@ -1,0 +1,76 @@
+{% from "_macros.html" import ico %}
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="csrf-token" content="{{ csrf_token }}">
+  <title>{% block titulo %}Inicio{% endblock %} · SGR Municipalidad de La Serena</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/sgr.css') }}">
+</head>
+<body>
+{% include "_sprite.html" %}
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<header class="cabecera" role="banner">
+  <div class="marca">
+    <button class="btn-menu" id="btn-menu" type="button" aria-controls="menu-lateral" aria-expanded="false" aria-label="Abrir menú">{{ ico('menu') }}</button>
+    <img src="{{ url_for('static', filename='img/logo-laserena.svg') }}" alt="Municipalidad de La Serena">
+    <span class="marca-texto">SISTEMA MUNICIPAL</span>
+  </div>
+
+  <div class="distintivo" id="distintivo-delegacion" role="group" aria-label="Delegación activa">
+    {{ ico('edificio') }}
+    <div class="distintivo-texto">
+      <span class="distintivo-etiqueta">Delegación activa</span>
+      {% if g.delegaciones|length > 1 %}
+        <label class="sr-only" for="selector-delegacion">Cambiar de delegación</label>
+        <select id="selector-delegacion" data-actual="{{ g.delegacion.id }}">
+          {% for d in g.delegaciones %}
+            <option value="{{ d.id }}" {{ 'selected' if d.id == g.delegacion.id }}>{{ d.codigo }} | Delegación {{ d.nombre }}</option>
+          {% endfor %}
+        </select>
+      {% else %}
+        <span class="distintivo-valor">{{ g.delegacion.codigo }} | Delegación {{ g.delegacion.nombre }}</span>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="usuario-caja">
+    <strong>{{ g.user.nombre }}</strong>
+    <span>{{ g.user.rol_nombre }}</span> ·
+    <button type="button" id="btn-salir">Salir</button>
+  </div>
+</header>
+
+<div class="estructura">
+  <nav class="menu" id="menu-lateral" aria-label="Menú principal">
+    {% set operativos = menu|selectattr('operativo')|list %}
+    {% set pendientes = menu|rejectattr('operativo')|list %}
+    <ul>
+      {% for m in operativos %}
+        <li><a href="{{ m.ruta }}" {% if (menu_activo or 'inicio') == m.clave %}aria-current="page"{% endif %}>{{ m.t }}</a></li>
+      {% endfor %}
+    </ul>
+    {% if pendientes %}
+      <h2>Próximos módulos</h2>
+      <ul>
+        {% for m in pendientes %}
+          <li><a href="{{ m.ruta }}" {% if menu_activo == m.clave %}aria-current="page"{% endif %}>{{ m.t }} <span class="etiqueta-plantilla">Plantilla</span></a></li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </nav>
+  <div class="velo-menu" id="velo-menu"></div>
+
+  <main class="contenido" id="contenido" tabindex="-1">
+    {% block contenido %}{% endblock %}
+    <p class="pie">SGR · Gestión de Atención Ciudadana · Versión {{ app_version }}{% if git_commit %} · {{ git_commit }}{% endif %} · Datos de prueba</p>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.all.min.js"></script>
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

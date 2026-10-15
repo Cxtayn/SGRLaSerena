@@ -1,0 +1,74 @@
+# Resultados de pruebas automáticas
+
+Ejecución: 12-10-2026 19:37 · Entorno: local (SQLite temporal, cliente de pruebas Flask)
+
+**66 de 66 pruebas aprobadas.**
+
+| Prueba | Descripción | Resultado |
+|---|---|---|
+| test_CP_ATN_01_registro_correcto_con_folio_responsable_y_delegacion |  | Aprobada |
+| test_CP_ATN_02_campos_obligatorios |  | Aprobada |
+| test_CP_ATN_03_dependencia_tipo_subatencion |  | Aprobada |
+| test_CP_ATN_04_solo_opciones_activas |  | Aprobada |
+| test_CP_ATN_05_prevencion_de_doble_envio |  | Aprobada |
+| test_CP_ATN_06_no_se_puede_forzar_delegacion_ni_responsable |  | Aprobada |
+| test_CP_ATN_07_usa_la_delegacion_activa_tras_cambiar_contexto |  | Aprobada |
+| test_CP_ATN_08_solicitante_busqueda_y_alta_rapida |  | Aprobada |
+| test_CP_ATN_09_solicitante_inexistente |  | Aprobada |
+| test_CP_ATN_10_cancelar_no_crea_registros | Cancelar es una acción solo de interfaz: ninguna llamada a la API ocurre. | Aprobada |
+| test_CP_AUT_01_login_correcto_por_usuario | Ingreso correcto con nombre de usuario. | Aprobada |
+| test_CP_AUT_02_login_correcto_por_correo | Ingreso correcto con correo (sin distinguir mayúsculas). | Aprobada |
+| test_CP_AUT_03_clave_incorrecta_mensaje_generico |  | Aprobada |
+| test_CP_AUT_04_campos_vacios |  | Aprobada |
+| test_CP_AUT_05_cuenta_inactiva |  | Aprobada |
+| test_CP_AUT_06_bloqueo_por_intentos |  | Aprobada |
+| test_CP_AUT_07_cierre_de_sesion_y_rutas_protegidas |  | Aprobada |
+| test_CP_AUT_08_rutas_protegidas_sin_sesion |  | Aprobada |
+| test_CP_AUT_09_csrf_obligatorio |  | Aprobada |
+| test_CP_AUT_10_next_no_permite_redireccion_externa |  | Aprobada |
+| test_CP_AUT_11_cuenta_desactivada_pierde_acceso_de_inmediato |  | Aprobada |
+| test_CP_CRUD_01_ciclo_completo_de_los_seis_mantenedores | Crear, consultar, editar y eliminar en cada mantenedor (superadministrador). | Aprobada |
+| test_CP_CRUD_02_campos_requeridos_y_formatos |  | Aprobada |
+| test_CP_CRUD_03_longitudes_maximas |  | Aprobada |
+| test_CP_CRUD_04_duplicados |  | Aprobada |
+| test_CP_CRUD_05_restricciones_por_relaciones |  | Aprobada |
+| test_CP_DEL_01_no_se_desactiva_la_delegacion_activa |  | Aprobada |
+| test_CP_LST_01_busqueda_parcial_sin_mayusculas_ni_tildes |  | Aprobada |
+| test_CP_LST_02_busqueda_en_varios_campos_y_terminos |  | Aprobada |
+| test_CP_LST_03_caracteres_especiales_en_busqueda |  | Aprobada |
+| test_CP_LST_04_paginacion_y_total |  | Aprobada |
+| test_CP_LST_05_filtros_combinados_se_mantienen_al_paginar |  | Aprobada |
+| test_CP_LST_06_exportacion_coincide_con_la_tabla_y_con_todas_las_paginas |  | Aprobada |
+| test_CP_LST_07_exportacion_no_incluye_campos_sensibles |  | Aprobada |
+| test_CP_LST_08_exportacion_neutraliza_formulas |  | Aprobada |
+| test_CP_LST_09_exportar_requiere_permiso |  | Aprobada |
+| test_CP_LST_10_ordenamiento |  | Aprobada |
+| test_CP_PER_01_menu_diferenciado_por_rol |  | Aprobada |
+| test_CP_PER_02_acceso_directo_a_modulos_no_autorizados |  | Aprobada |
+| test_CP_PER_03_distintivo_muestra_delegacion_usuario_y_rol |  | Aprobada |
+| test_CP_PER_04_selector_solo_con_delegaciones_autorizadas |  | Aprobada |
+| test_CP_PER_05_cambio_de_contexto_actualiza_listados |  | Aprobada |
+| test_CP_PER_06_no_se_puede_cambiar_a_delegacion_ajena |  | Aprobada |
+| test_CP_PER_07_acceso_a_registros_de_otra_delegacion_por_id |  | Aprobada |
+| test_CP_PER_08_superadmin_ve_todas_las_delegaciones |  | Aprobada |
+| test_CP_PER_09_opciones_de_formularios_respetan_el_alcance |  | Aprobada |
+| test_CP_REC_01_respuesta_no_revela_si_el_correo_existe |  | Aprobada |
+| test_CP_REC_02_correo_invalido_o_vacio |  | Aprobada |
+| test_CP_REC_03_flujo_completo_y_clave_anterior_rechazada |  | Aprobada |
+| test_CP_REC_04_codigo_incorrecto_vencido_y_reutilizado |  | Aprobada |
+| test_CP_REC_05_reenvio_respeta_espera_de_45_segundos |  | Aprobada |
+| test_CP_REC_06_intentos_fallidos_agotan_el_codigo |  | Aprobada |
+| test_CP_REC_07_nueva_clave_sin_verificacion_es_rechazada |  | Aprobada |
+| test_CP_REC_08_requisitos_y_confirmacion_de_clave |  | Aprobada |
+| test_CP_REC_09_cambio_de_clave_cierra_sesiones_abiertas |  | Aprobada |
+| test_CP_REC_10_codigo_no_se_guarda_en_claro |  | Aprobada |
+| test_CP_ROL_01_escalamiento_de_privilegios |  | Aprobada |
+| test_CP_ROL_02_un_coordinador_no_asigna_rol_superior_ni_delegaciones_ajenas |  | Aprobada |
+| test_CP_SEG_01_ninguna_respuesta_filtra_hashes |  | Aprobada |
+| test_CP_SEG_02_cabeceras_y_cookie |  | Aprobada |
+| test_CP_SEG_03_salida_html_escapada |  | Aprobada |
+| test_CP_SEG_04_inyeccion_sql_en_login |  | Aprobada |
+| test_CP_SEG_05_salud |  | Aprobada |
+| test_CP_TIP_01_tipo_y_subatencion_integridad |  | Aprobada |
+| test_CP_TIP_02_subatencion_duplicada_en_mismo_tipo |  | Aprobada |
+| test_CP_USR_01_reglas_de_usuarios |  | Aprobada |

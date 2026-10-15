@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% from "_macros.html" import ico %}
+{% block titulo %}Inicio{% endblock %}
+{% block contenido %}
+<div class="miga">Gestión municipal / Inicio</div>
+<div class="titulo-pagina"><h1>Bienvenido, {{ g.user.nombre }}</h1></div>
+<div class="rejilla-tarjetas">
+  <section class="tarjeta" aria-labelledby="t-perfil">
+    <h2 id="t-perfil">Tu perfil</h2>
+    <dl class="dato-vista">
+      <dt>Rol</dt><dd>{{ g.user.rol_nombre }}</dd>
+      <dt>Alcance</dt><dd>{{ alcance_texto }}</dd>
+      <dt>Delegación activa</dt><dd>{{ g.delegacion.codigo }} · {{ g.delegacion.nombre }}</dd>
+      <dt>Delegaciones autorizadas</dt>
+      <dd><ul class="etiquetas">{% for d in g.delegaciones %}<li>{{ d.codigo }} · {{ d.nombre }}</li>{% endfor %}</ul></dd>
+    </dl>
+  </section>
+  {% if resumen %}
+  <section class="tarjeta" aria-labelledby="t-resumen">
+    <h2 id="t-resumen">Atenciones de {{ g.delegacion.codigo }}</h2>
+    <dl class="dato-vista">
+      <dt>Registradas hoy</dt><dd><span class="cifra">{{ resumen.atenciones_hoy }}</span></dd>
+      <dt>Total en la delegación</dt><dd><span class="cifra">{{ resumen.atenciones_total }}</span></dd>
+    </dl>
+    <p class="ayuda">Las cifras cambian al cambiar de delegación.</p>
+  </section>
+  {% endif %}
+  <section class="tarjeta" aria-labelledby="t-permisos" style="grid-column:1/-1">
+    <h2 id="t-permisos">Qué puedes hacer con tu rol</h2>
+    <p class="ayuda">El menú solo muestra los módulos autorizados. El servidor vuelve a validar cada acción.</p>
+    <ul class="lista-permisos">
+      {% for p in permisos_por_modulo %}
+        <li><span>{{ p.modulo }}{% if not p.operativo %} <span class="etiqueta-plantilla">Plantilla</span>{% endif %}</span>
+            <span>{{ p.acciones|join(', ') if p.acciones else 'Sin acceso' }}</span></li>
+      {% endfor %}
+    </ul>
+  </section>
+</div>
+{% endblock %}

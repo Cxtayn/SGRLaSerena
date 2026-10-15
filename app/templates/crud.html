@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% from "_macros.html" import ico %}
+{% block titulo %}{{ cfg.titulo }}{% endblock %}
+{% block contenido %}
+<div class="miga">Gestión municipal / {{ cfg.migas }}</div>
+<div class="titulo-pagina">
+  <h1>{{ cfg.titulo }}</h1>
+  {% if cfg.puede.crear %}<button type="button" class="btn btn-primario" id="btn-nuevo">{{ ico('mas') }} Nuevo registro</button>{% endif %}
+</div>
+{% include "_lista.html" %}
+<script id="datos-pagina" type="application/json">{{ cfg|tojson }}</script>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/crud.js') }}"></script>{% endblock %}

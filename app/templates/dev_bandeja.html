@@ -1,0 +1,13 @@
+{% extends "auth_base.html" %}
+{% block titulo %}Bandeja de desarrollo{% endblock %}
+{% block contenido %}
+<h1>Bandeja de desarrollo</h1>
+<p class="aviso">Correos <strong>simulados</strong> (MAIL_MODE=console). Solo para pruebas; desactivar con DEV_OUTBOX=0.</p>
+{% for c in correos %}
+  <article class="tarjeta" style="margin-bottom:12px">
+    <p class="ayuda">{{ c.creado_en }} · Para: {{ c.destino }}</p>
+    <h2>{{ c.asunto }}</h2>
+    <pre style="white-space:pre-wrap;font-family:inherit;margin:0">{{ c.cuerpo }}</pre>
+  </article>
+{% else %}<p>No hay correos todavía.</p>{% endfor %}
+{% endblock %}

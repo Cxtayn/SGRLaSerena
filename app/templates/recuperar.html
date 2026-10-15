@@ -1,0 +1,17 @@
+{% extends "auth_base.html" %}
+{% block titulo %}Recuperar contraseña{% endblock %}
+{% block contenido %}
+<h1>Recuperar contraseña</h1>
+<p class="paso">Paso 1 de 3 · Solicitar código</p>
+<p class="sub">Ingresa el correo asociado a tu cuenta.</p>
+<form id="form-recuperar" novalidate>
+  <div class="campo">
+    <label for="correo">Correo electrónico <span class="req" aria-hidden="true">*</span></label>
+    <input id="correo" name="correo" type="email" autocomplete="email" autocapitalize="none" spellcheck="false" maxlength="120" required aria-required="true" aria-describedby="err-correo">
+    <div class="error-campo" id="err-correo" role="alert"></div>
+  </div>
+  <button class="btn btn-primario" type="submit" id="btn-enviar">Enviar código</button>
+</form>
+<p class="ayuda" style="margin-top:12px">Si la cuenta existe, recibirás instrucciones.</p>
+<div class="auth-enlaces"><a href="{{ url_for('auth.login_page') }}">Volver al inicio de sesión</a></div>
+{% endblock %}

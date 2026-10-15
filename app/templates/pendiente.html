@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% from "_macros.html" import ico %}
+{% block titulo %}{{ cfg.titulo }}{% endblock %}
+{% block contenido %}
+<div class="miga">Gestión municipal / {{ cfg.titulo }}</div>
+<div class="titulo-pagina"><h1>{{ cfg.titulo }}</h1><span class="etiqueta-plantilla">Plantilla · lógica pendiente</span></div>
+<p class="aviso"><strong>Módulo pendiente.</strong> {{ cfg.nota }} La pantalla muestra la navegación y la visibilidad por rol; los datos son ficticios y las acciones no guardan información.</p>
+<p>{{ cfg.descripcion }}</p>
+<div class="tabla-caja">
+  <table class="tabla">
+    <caption>Vista de ejemplo (datos ficticios)</caption>
+    <thead><tr>{% for c in cfg.columnas %}<th scope="col">{{ c }}</th>{% endfor %}</tr></thead>
+    <tbody>{% for f in cfg.filas %}<tr>{% for c in f %}<td data-label="{{ cfg.columnas[loop.index0] }}">{{ c }}</td>{% endfor %}</tr>{% endfor %}</tbody>
+  </table>
+</div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "auth_base.html" %}
+{% from "_macros.html" import ico %}
+{% block titulo %}Iniciar sesión{% endblock %}
+{% block contenido %}
+<h1>Iniciar sesión</h1>
+<p class="sub">Accede con tu cuenta institucional.</p>
+<form id="form-login" novalidate data-next="{{ next }}">
+  <div class="campo">
+    <label for="usuario">Usuario o correo <span class="req" aria-hidden="true">*</span></label>
+    <input id="usuario" name="usuario" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" maxlength="120" required aria-required="true" aria-describedby="err-usuario">
+    <div class="error-campo" id="err-usuario" role="alert"></div>
+  </div>
+  <div class="campo">
+    <label for="password">Contraseña <span class="req" aria-hidden="true">*</span></label>
+    <div class="fila-clave">
+      <input id="password" name="password" type="password" autocomplete="current-password" maxlength="128" required aria-required="true" aria-describedby="err-password">
+      <button type="button" class="btn" data-mostrar="password" aria-pressed="false" aria-controls="password">Mostrar</button>
+    </div>
+    <div class="error-campo" id="err-password" role="alert"></div>
+  </div>
+  <div class="error-campo" id="err-general" role="alert"></div>
+  <button class="btn btn-primario" type="submit" id="btn-ingresar">Ingresar</button>
+</form>
+<div class="auth-enlaces"><a href="{{ url_for('auth.recuperar_page') }}">¿Olvidaste tu contraseña?</a></div>
+{% endblock %}
