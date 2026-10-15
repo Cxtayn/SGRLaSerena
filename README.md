@@ -2,8 +2,7 @@
 
 Proyecto Integrado · **Segunda evaluación**. Versión de la entrega: `2.0.0-entrega2` (archivo `VERSION`; se muestra en el pie y en `/salud`).
 
-**Integrantes:** _(completar)_ · **Docente:** _(completar)_ · **Repositorio:** _(URL)_ · **URL AWS:** _(URL)_ · **Commit/etiqueta entregado:** _(completar)_
-
+**Integrantes:** [Lia Codoceo], [Lukas Villagra] · **Docente:** [Jorge Cortes] · **Repositorio:** https://github.com/Cxtayn/SGRLaSerena · **URL AWS:** http://98.95.215.124 · **Commit/etiqueta entregado:** `v2.0.0-entrega2`
 ## Qué incluye
 
 Login · recuperación de contraseña en 3 pasos (solicitar, validar código, nueva clave) · seis mantenedores (Delegaciones, Roles, Usuarios, Ítems y metas, Tipo de Atención, Sub Atención) · ingreso de atención · menú y pantallas diferenciadas por rol · plantillas de los módulos pendientes · exportación a Excel · SweetAlert2 en alertas y confirmaciones · pruebas funcionales automáticas y script de estrés.
@@ -52,7 +51,9 @@ python tests/stress/stress_test.py --base https://TU-DOMINIO --clave '...'   # e
 Plan y registro: `docs/PLAN_PRUEBAS.md`.
 
 ## Despliegue en AWS
-`docs/DESPLIEGUE_AWS.md` y carpeta `deploy/` (EC2 + nginx + gunicorn + systemd).
+| Despliegue en AWS | **Operativo** | EC2 t3.small (Ubuntu 24.04) + nginx + gunicorn, IP elástica, base SQLite en EBS |
+| Repositorio Git | **Operativo** | Etiqueta `v2.0.0-entrega2` |
+Servicios: EC2 (t3.small, Ubuntu 24.04, us-east-1), EBS 8 GiB (base SQLite), Security Group (80/443 públicos, 22 restringido), Elastic IP. Instalación: `sudo bash deploy/instalar_ec2.sh <URL_REPO> <etiqueta>`. Actualización: `sudo bash /opt/sgr/deploy/actualizar_ec2.sh <etiqueta>`. Detalle en `docs/DESPLIEGUE_AWS.md`.
 
 ## Estado de cada módulo
 
